@@ -35,6 +35,8 @@
 
 #include <ar5416desc.h>
 
+
+void ar5416_writeDebug(struct ath_hal *ah, int val);
 extern  HAL_STATUS ar5416GetCapability(struct ath_hal *, HAL_CAPABILITY_TYPE,
         a_uint32_t, a_uint32_t *);
 extern  const HAL_RATE_TABLE *ar5416GetRateTable(struct ath_hal *, a_uint32_t mode);

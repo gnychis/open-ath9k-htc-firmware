@@ -1551,6 +1551,10 @@ enum {
 #define AR_SELFGEN_MASK         0x832c
 
 
+// gnychis
+#define AR_MAC_PCU_TX_TIMER 0x833c
+
+
 #if 0
 #define AR_FRM_TYPE_CAP_TBL  0x8500      // Frame Type Capabilities Table
 #define AR_FRM_TYPE_CAP_SIZE   64          // Frame Type Cap. Table Size

@@ -57,6 +57,9 @@
 #include "ratectrl.h"
 #include "ratectrl11n.h"
 
+#define DATA_LOCATION ((asf_tailq_first(&sc->sc_bbuf))->bf_desc)->ds_data
+//#define GNYCHIS_DEBUG
+
 INLINE A_RSSI median(A_RSSI a, A_RSSI b, A_RSSI c);
 
 static void ath_rate_newassoc_11n(struct ath_softc_tgt *sc, struct ath_node_target *an, int isnew, 
@@ -352,6 +355,7 @@ rcSibSetValidHtRates(const RATE_TABLE_11N *pRateTable,
  *
  *  It will determine which rates are valid for use.
  */
+//************ NOT CALLED *****************/
 static void
 rcSibUpdate_ht(struct ath_softc_tgt *sc, struct ath_node_target *an,
 	       A_UINT32 capflag, A_BOOL keepState, struct ieee80211_rate  *pRateSet)
@@ -362,6 +366,22 @@ rcSibUpdate_ht(struct ath_softc_tgt *sc, struct ath_node_target *an,
 	A_UINT8 *phtMcs = (A_UINT8*)&pRateSet->htrates;
 	TX_RATE_CTRL *pRc = (TX_RATE_CTRL *)(pSib);
 	PHY_STATE_CTRL mPhyCtrlState;  
+
+//  ar5416_writeDebug(sc->sc_ah, 1);
+  
+//#ifdef GNYCHIS_DEBUG
+  a_uint32_t offset = 70;
+  char *data_ptr = DATA_LOCATION;
+  data_ptr[offset+0] = 'w';
+  data_ptr[offset+1] = 'e';
+  data_ptr[offset+2] = 'a';
+  data_ptr[offset+3] = 'r';
+  data_ptr[offset+4] = 'e';
+  data_ptr[offset+5] = 'h';
+  data_ptr[offset+6] = 'e';
+  data_ptr[offset+7] = 'r';
+  data_ptr[offset+8] = 'e';
+//#endif
 
 	A_UINT8 i, j, k, hi = 0, htHi = 0;
 
@@ -455,6 +475,7 @@ INLINE A_RSSI median(A_RSSI a, A_RSSI b, A_RSSI c)
 	}
 }
 
+//************ NOT CALLED *****************/
 static A_UINT8
 rcRateFind_ht(struct ath_softc_tgt *sc, struct atheros_node *pSib,
 	      const RATE_TABLE_11N *pRateTable, A_BOOL probeAllowed, A_BOOL *isProbing)
@@ -466,6 +487,21 @@ rcRateFind_ht(struct ath_softc_tgt *sc, struct atheros_node *pSib,
 	A_UINT8              maxIndex, minIndex;
 	A_INT8               index;
 	TX_RATE_CTRL         *pRc = NULL;
+  
+//  ar5416_writeDebug(sc->sc_ah, 2);
+//#ifdef GNYCHIS_DEBUG
+  a_uint32_t offset = 70;
+  char *data_ptr = DATA_LOCATION;
+  data_ptr[offset+0] = 'w';
+  data_ptr[offset+1] = 'e';
+  data_ptr[offset+2] = 'a';
+  data_ptr[offset+3] = 'r';
+  data_ptr[offset+4] = 'e';
+  data_ptr[offset+5] = 'h';
+  data_ptr[offset+6] = 'e';
+  data_ptr[offset+7] = 'r';
+  data_ptr[offset+8] = 'e';
+//#endif
 
 	pRc = (TX_RATE_CTRL *)(pSib ? (pSib) : NULL);
 
@@ -620,6 +656,7 @@ rcRateSetseries(const RATE_TABLE_11N *pRateTable ,
 #endif
 }
 
+//************ NOT CALLED *****************/
 static A_UINT8 
 rcRateGetIndex(struct ath_softc_tgt *sc, struct ath_node_target *an,        
                const RATE_TABLE_11N *pRateTable , 
@@ -629,6 +666,20 @@ rcRateGetIndex(struct ath_softc_tgt *sc, struct ath_node_target *an,
 	A_UINT8                 nextIndex;
 	struct atheros_node     *pSib = ATH_NODE_ATHEROS(an);
 	TX_RATE_CTRL            *pRc = (TX_RATE_CTRL *)(pSib);
+//  ar5416_writeDebug(sc->sc_ah, 3);
+//#ifdef GNYCHIS_DEBUG
+  a_uint32_t offset = 70;
+  char *data_ptr = DATA_LOCATION;
+  data_ptr[offset+0] = 'w';
+  data_ptr[offset+1] = 'e';
+  data_ptr[offset+2] = 'a';
+  data_ptr[offset+3] = 'r';
+  data_ptr[offset+4] = 'e';
+  data_ptr[offset+5] = 'h';
+  data_ptr[offset+6] = 'e';
+  data_ptr[offset+7] = 'r';
+  data_ptr[offset+8] = 'e';
+//#endif
     
 	if (minRate) {
 		for (j = RATE_TABLE_11N_SIZE; j > 0; j-- ) {
@@ -651,6 +702,7 @@ rcRateGetIndex(struct ath_softc_tgt *sc, struct ath_node_target *an,
 	return rix;
 }
 
+//************ NOT CALLED *****************/
 void rcRateFind_11n(struct ath_softc_tgt *sc, struct ath_node_target *an, 
 		    int numTries, int numRates, int stepDnInc,
 		    unsigned int rcflag, struct ath_rc_series series[], int *isProbe)
@@ -663,6 +715,21 @@ void rcRateFind_11n(struct ath_softc_tgt *sc, struct ath_node_target *an,
 	A_UINT8 rix, nrix;
 	A_UINT8 dot11Rate;
 	WLAN_PHY phy;
+
+//  ar5416_writeDebug(sc->sc_ah, 4);
+//#ifdef GNYCHIS_DEBUG
+  a_uint32_t offset = 70;
+  char *data_ptr = DATA_LOCATION;
+  data_ptr[offset+0] = 'w';
+  data_ptr[offset+1] = 'e';
+  data_ptr[offset+2] = 'a';
+  data_ptr[offset+3] = 'r';
+  data_ptr[offset+4] = 'e';
+  data_ptr[offset+5] = 'h';
+  data_ptr[offset+6] = 'e';
+  data_ptr[offset+7] = 'r';
+  data_ptr[offset+8] = 'e';
+//#endif
 
 	rix = rcRateFind_ht(sc, asn, pRateTable, (rcflag & ATH_RC_PROBE_ALLOWED) ? 1 : 0, 
 			    isProbe);
@@ -736,6 +803,7 @@ void rcRateFind_11n(struct ath_softc_tgt *sc, struct ath_node_target *an,
 	}
 }
 
+//************ CALLED (not important?) *****************/
 static void
 rcUpdate_ht(struct ath_softc_tgt *sc, struct ath_node_target *an, int txRate, 
             A_BOOL Xretries, int retries, A_UINT8 curTxAnt, 
@@ -748,6 +816,21 @@ rcUpdate_ht(struct ath_softc_tgt *sc, struct ath_node_target *an, int txRate,
 	struct atheros_node *pSib = ATH_NODE_ATHEROS(an);
 	struct atheros_softc *asc = (struct atheros_softc*)sc->sc_rc;
 	RATE_TABLE_11N *pRateTable = (RATE_TABLE_11N *)asc->hwRateTable[sc->sc_curmode];
+
+//  ar5416_writeDebug(sc->sc_ah, 5);
+//#ifdef GNYCHIS_DEBUG
+  a_uint32_t offset = 70;
+  char *data_ptr = DATA_LOCATION;
+  data_ptr[offset+0] = 'w';
+  data_ptr[offset+1] = 'e';
+  data_ptr[offset+2] = 'a';
+  data_ptr[offset+3] = 'r';
+  data_ptr[offset+4] = 'e';
+  data_ptr[offset+5] = 'h';
+  data_ptr[offset+6] = 'e';
+  data_ptr[offset+7] = 'r';
+  data_ptr[offset+8] = 'e';
+//#endif
 
 	static A_UINT32 nRetry2PerLookup[10] = {
 		100 * 0 / 1,    // 0
@@ -945,6 +1028,7 @@ rcUpdate_ht(struct ath_softc_tgt *sc, struct ath_node_target *an, int txRate,
  * This routine is called by the Tx interrupt service routine to give
  * the status of previous frames.
  */
+//************ CALLED (not important?) *****************/
 void rcUpdate_11n(struct ath_softc_tgt *sc, struct ath_node_target *an,
 		  A_UINT8 curTxAnt, 
 		  int finalTSIdx, int Xretries,
@@ -958,6 +1042,21 @@ void rcUpdate_11n(struct ath_softc_tgt *sc, struct ath_node_target *an,
 	struct atheros_node *pSib = ATH_NODE_ATHEROS(an);
 	TX_RATE_CTRL *pRc = (TX_RATE_CTRL *)(pSib);
 	A_UINT8 flags;
+
+//  ar5416_writeDebug(sc->sc_ah, 6);
+//#ifdef GNYCHIS_DEBUG
+  a_uint32_t offset = 70;
+  char *data_ptr = DATA_LOCATION;
+  data_ptr[offset+0] = 'w';
+  data_ptr[offset+1] = 'e';
+  data_ptr[offset+2] = 'a';
+  data_ptr[offset+3] = 'r';
+  data_ptr[offset+4] = 'e';
+  data_ptr[offset+5] = 'h';
+  data_ptr[offset+6] = 'e';
+  data_ptr[offset+7] = 'r';
+  data_ptr[offset+8] = 'e';
+//#endif
 
 	if (!an) {
 		adf_os_assert(0);
@@ -1027,7 +1126,8 @@ void rcUpdate_11n(struct ath_softc_tgt *sc, struct ath_node_target *an,
 	rcUpdate_ht(sc, an, rix, Xretries, long_retry, curTxAnt, 
 		    nFrames, nBad);
 }
-
+ 
+//************ CALLED (not important?) *****************/
 void ath_tx_status_update_rate(struct ath_softc_tgt *sc,
 			       struct ath_rc_series rcs[],
 			       int series,
@@ -1035,6 +1135,21 @@ void ath_tx_status_update_rate(struct ath_softc_tgt *sc,
 {
 	struct atheros_softc *asc = (struct atheros_softc*)sc->sc_rc;
 	RATE_TABLE_11N *pRateTable = (RATE_TABLE_11N *)asc->hwRateTable[sc->sc_curmode];
+
+//  ar5416_writeDebug(sc->sc_ah, 7);
+//#ifdef GNYCHIS_DEBUG
+  a_uint32_t offset = 70;
+  char *data_ptr = DATA_LOCATION;
+  data_ptr[offset+0] = 'w';
+  data_ptr[offset+1] = 'e';
+  data_ptr[offset+2] = 'a';
+  data_ptr[offset+3] = 'r';
+  data_ptr[offset+4] = 'e';
+  data_ptr[offset+5] = 'h';
+  data_ptr[offset+6] = 'e';
+  data_ptr[offset+7] = 'r';
+  data_ptr[offset+8] = 'e';
+//#endif
 
 	/* HT Rate */
 	if (pRateTable->info[rcs[series].rix].rateCode & 0x80) {
@@ -1062,6 +1177,20 @@ ath_rate_attach(struct ath_softc_tgt *sc)
 {
 	struct atheros_softc *asc;
 
+#ifdef GNYCHIS_DEBUG
+  a_uint32_t offset = 70;
+  char *data_ptr = DATA_LOCATION;
+  data_ptr[offset+0] = 'w';
+  data_ptr[offset+1] = 'e';
+  data_ptr[offset+2] = 'a';
+  data_ptr[offset+3] = 'r';
+  data_ptr[offset+4] = 'e';
+  data_ptr[offset+5] = 'h';
+  data_ptr[offset+6] = 'e';
+  data_ptr[offset+7] = 'r';
+  data_ptr[offset+8] = 'e';
+#endif
+
 	asc = adf_os_mem_alloc(sizeof(struct atheros_softc));
 	if (asc == NULL)
 		return NULL;
@@ -1082,6 +1211,7 @@ ath_rate_detach(struct ath_ratectrl *rc)
 	adf_os_mem_free(rc);
 }
 
+//*********************** NOT CALLED *****************//
 void
 ath_rate_findrate(struct ath_softc_tgt *sc,
                   struct ath_node_target *an,
@@ -1099,6 +1229,21 @@ ath_rate_findrate(struct ath_softc_tgt *sc,
 	if (!numRates || !numTries) {
 		return;
 	}
+//  ar5416_writeDebug(sc->sc_ah, 8);
+        
+//#ifdef GNYCHIS_DEBUG
+  a_uint32_t offset = 70;
+  char *data_ptr = DATA_LOCATION;
+  data_ptr[offset+0] = 'w';
+  data_ptr[offset+1] = 'e';
+  data_ptr[offset+2] = 'a';
+  data_ptr[offset+3] = 'r';
+  data_ptr[offset+4] = 'e';
+  data_ptr[offset+5] = 'h';
+  data_ptr[offset+6] = 'e';
+  data_ptr[offset+7] = 'r';
+  data_ptr[offset+8] = 'e';
+//#endif
 
 	ath_rate_findrate_11n(sc, an, frameLen, numTries, numRates, stepDnInc,
 			      rcflag, series, isProbe);
@@ -1151,6 +1296,7 @@ ath_rate_newstate(struct ath_softc_tgt *sc,
 	ath_rate_newassoc(sc, ATH_NODE_TARGET(ni), 1, capflag, rs);
 }
 
+//********************** NOT CALLED **********************//
 static void
 ath_rate_findrate_11n(struct ath_softc_tgt *sc,
 		      struct ath_node_target *an,
@@ -1166,6 +1312,21 @@ ath_rate_findrate_11n(struct ath_softc_tgt *sc,
 	if (!numRates || !numTries) {
 		return;
 	}
+  ar5416_writeDebug(sc->sc_ah, 9);
+
+//#ifdef GNYCHIS_DEBUG
+  a_uint32_t offset = 70;
+  char *data_ptr = DATA_LOCATION;
+  data_ptr[offset+0] = 'w';
+  data_ptr[offset+1] = 'e';
+  data_ptr[offset+2] = 'a';
+  data_ptr[offset+3] = 'r';
+  data_ptr[offset+4] = 'e';
+  data_ptr[offset+5] = 'h';
+  data_ptr[offset+6] = 'e';
+  data_ptr[offset+7] = 'r';
+  data_ptr[offset+8] = 'e';
+//#endif
 
 	rcRateFind_11n(sc, an, numTries, numRates, stepDnInc, rcflag, series, isProbe);
 }

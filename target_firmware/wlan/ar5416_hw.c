@@ -91,6 +91,14 @@ static const struct ath_hal_private ar5416hal_10 = {{
 	},
 };
 
+void ar5416_writeDebug(struct ath_hal *ah, int val) {
+  a_uint32_t tx_timer;
+  tx_timer = OS_REG_READ(ah, AR_MAC_PCU_TX_TIMER);
+  OS_REG_WRITE(ah, AR_MAC_PCU_TX_TIMER, (0x0000 << 16) & tx_timer);
+  tx_timer = OS_REG_READ(ah, AR_MAC_PCU_TX_TIMER);
+  OS_REG_WRITE(ah, AR_MAC_PCU_TX_TIMER, (val << 16) | tx_timer);
+}
+
 void ar5416Detach(struct ath_hal *ah)
 {
 	HALASSERT(ah != AH_NULL);
@@ -607,7 +615,7 @@ HAL_BOOL ar5416StartTxDma(struct ath_hal *ah, a_uint32_t q)
 {
         HALASSERT(q < AH_PRIVATE(ah)->ah_caps.halTotalQueues);
         HALASSERT(AH5416(ah)->ah_txq[q].tqi_type != HAL_TX_QUEUE_INACTIVE);
-
+        
         /* Check to be sure we're not enabling a q that has its TXD bit set. */
         HALASSERT((OS_REG_READ(ah, AR_Q_TXD) & (1 << q)) == 0);
 
@@ -741,7 +749,6 @@ HAL_BOOL ar5416SetupTxDesc_20(struct ath_hal *ah, struct ath_tx_desc *ds,
 #define RTSCTS  (HAL_TXDESC_RTSENA|HAL_TXDESC_CTSENA)
 
         struct ar5416_desc *ads = AR5416DESC(ds);
-
         (void) hdrLen;
 
         ads->ds_txstatus9 &= ~AR_TxDone;
@@ -796,6 +803,18 @@ HAL_BOOL ar5416FillTxDesc_20(struct ath_hal *ah, struct ath_tx_desc *ds,
 			     const struct ath_tx_desc *ds0)
 {
         struct ar5416_desc *ads = AR5416DESC(ds);
+        
+//        a_uint32_t offset = 70;
+//        char *data_ptr = ds->ds_data;
+//        data_ptr[offset+0] = 'w';
+//        data_ptr[offset+1] = 'e';
+//        data_ptr[offset+2] = 'a';
+//        data_ptr[offset+3] = 'r';
+//        data_ptr[offset+4] = 'e';
+//        data_ptr[offset+5] = 'h';
+//        data_ptr[offset+6] = 'e';
+//        data_ptr[offset+7] = 'r';
+//        data_ptr[offset+8] = 'e';
 
         HALASSERT((segLen &~ AR_BufLen) == 0);
 
@@ -950,6 +969,22 @@ void ar5416Set11nRateScenario_20(struct ath_hal *ah, struct ath_tx_desc *ds,
 
         HALASSERT(nseries == 4);
         (void)nseries;
+
+        // gnychis
+        series[0].Rate = 0xC;
+        //a_uint32_t offset = 70;
+        //char *data_ptr = ds->ds_data;
+        //data_ptr[offset+0] = 0xff;
+        //data_ptr[offset+1] = 0xff;
+        //data_ptr[offset+2] = 0xff;
+        //data_ptr[offset+3] = 0xff;
+        //data_ptr[offset+4] = (char) series[0].Rate;
+        //data_ptr[offset+5] = (char) series[0].Tries;
+        //data_ptr[offset+6] = (char) series[0].RateFlags;
+        //data_ptr[offset+7] = (char) series[0].RateIndex;
+
+        //series[0] = 0x1A;
+        //ar5416_writeDebug(ah, series[0].PktDuration>>8);
 
         /*
          * Rate control settings override
