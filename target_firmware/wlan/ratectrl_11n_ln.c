@@ -57,9 +57,6 @@
 #include "ratectrl.h"
 #include "ratectrl11n.h"
 
-#define DATA_LOCATION ((asf_tailq_first(&sc->sc_bbuf))->bf_desc)->ds_data
-//#define GNYCHIS_DEBUG
-
 INLINE A_RSSI median(A_RSSI a, A_RSSI b, A_RSSI c);
 
 static void ath_rate_newassoc_11n(struct ath_softc_tgt *sc, struct ath_node_target *an, int isnew, 
@@ -369,20 +366,6 @@ rcSibUpdate_ht(struct ath_softc_tgt *sc, struct ath_node_target *an,
 
 //  ar5416_writeDebug(sc->sc_ah, 1);
   
-//#ifdef GNYCHIS_DEBUG
-  a_uint32_t offset = 70;
-  char *data_ptr = DATA_LOCATION;
-  data_ptr[offset+0] = 'w';
-  data_ptr[offset+1] = 'e';
-  data_ptr[offset+2] = 'a';
-  data_ptr[offset+3] = 'r';
-  data_ptr[offset+4] = 'e';
-  data_ptr[offset+5] = 'h';
-  data_ptr[offset+6] = 'e';
-  data_ptr[offset+7] = 'r';
-  data_ptr[offset+8] = 'e';
-//#endif
-
 	A_UINT8 i, j, k, hi = 0, htHi = 0;
 
 	pRateTable = (RATE_TABLE_11N*)asc->hwRateTable[sc->sc_curmode];
@@ -489,19 +472,6 @@ rcRateFind_ht(struct ath_softc_tgt *sc, struct atheros_node *pSib,
 	TX_RATE_CTRL         *pRc = NULL;
   
 //  ar5416_writeDebug(sc->sc_ah, 2);
-//#ifdef GNYCHIS_DEBUG
-  a_uint32_t offset = 70;
-  char *data_ptr = DATA_LOCATION;
-  data_ptr[offset+0] = 'w';
-  data_ptr[offset+1] = 'e';
-  data_ptr[offset+2] = 'a';
-  data_ptr[offset+3] = 'r';
-  data_ptr[offset+4] = 'e';
-  data_ptr[offset+5] = 'h';
-  data_ptr[offset+6] = 'e';
-  data_ptr[offset+7] = 'r';
-  data_ptr[offset+8] = 'e';
-//#endif
 
 	pRc = (TX_RATE_CTRL *)(pSib ? (pSib) : NULL);
 
@@ -667,19 +637,6 @@ rcRateGetIndex(struct ath_softc_tgt *sc, struct ath_node_target *an,
 	struct atheros_node     *pSib = ATH_NODE_ATHEROS(an);
 	TX_RATE_CTRL            *pRc = (TX_RATE_CTRL *)(pSib);
 //  ar5416_writeDebug(sc->sc_ah, 3);
-//#ifdef GNYCHIS_DEBUG
-  a_uint32_t offset = 70;
-  char *data_ptr = DATA_LOCATION;
-  data_ptr[offset+0] = 'w';
-  data_ptr[offset+1] = 'e';
-  data_ptr[offset+2] = 'a';
-  data_ptr[offset+3] = 'r';
-  data_ptr[offset+4] = 'e';
-  data_ptr[offset+5] = 'h';
-  data_ptr[offset+6] = 'e';
-  data_ptr[offset+7] = 'r';
-  data_ptr[offset+8] = 'e';
-//#endif
     
 	if (minRate) {
 		for (j = RATE_TABLE_11N_SIZE; j > 0; j-- ) {
@@ -717,19 +674,6 @@ void rcRateFind_11n(struct ath_softc_tgt *sc, struct ath_node_target *an,
 	WLAN_PHY phy;
 
 //  ar5416_writeDebug(sc->sc_ah, 4);
-//#ifdef GNYCHIS_DEBUG
-  a_uint32_t offset = 70;
-  char *data_ptr = DATA_LOCATION;
-  data_ptr[offset+0] = 'w';
-  data_ptr[offset+1] = 'e';
-  data_ptr[offset+2] = 'a';
-  data_ptr[offset+3] = 'r';
-  data_ptr[offset+4] = 'e';
-  data_ptr[offset+5] = 'h';
-  data_ptr[offset+6] = 'e';
-  data_ptr[offset+7] = 'r';
-  data_ptr[offset+8] = 'e';
-//#endif
 
 	rix = rcRateFind_ht(sc, asn, pRateTable, (rcflag & ATH_RC_PROBE_ALLOWED) ? 1 : 0, 
 			    isProbe);
@@ -818,19 +762,6 @@ rcUpdate_ht(struct ath_softc_tgt *sc, struct ath_node_target *an, int txRate,
 	RATE_TABLE_11N *pRateTable = (RATE_TABLE_11N *)asc->hwRateTable[sc->sc_curmode];
 
 //  ar5416_writeDebug(sc->sc_ah, 5);
-//#ifdef GNYCHIS_DEBUG
-  a_uint32_t offset = 70;
-  char *data_ptr = DATA_LOCATION;
-  data_ptr[offset+0] = 'w';
-  data_ptr[offset+1] = 'e';
-  data_ptr[offset+2] = 'a';
-  data_ptr[offset+3] = 'r';
-  data_ptr[offset+4] = 'e';
-  data_ptr[offset+5] = 'h';
-  data_ptr[offset+6] = 'e';
-  data_ptr[offset+7] = 'r';
-  data_ptr[offset+8] = 'e';
-//#endif
 
 	static A_UINT32 nRetry2PerLookup[10] = {
 		100 * 0 / 1,    // 0
@@ -1044,19 +975,6 @@ void rcUpdate_11n(struct ath_softc_tgt *sc, struct ath_node_target *an,
 	A_UINT8 flags;
 
 //  ar5416_writeDebug(sc->sc_ah, 6);
-//#ifdef GNYCHIS_DEBUG
-  a_uint32_t offset = 70;
-  char *data_ptr = DATA_LOCATION;
-  data_ptr[offset+0] = 'w';
-  data_ptr[offset+1] = 'e';
-  data_ptr[offset+2] = 'a';
-  data_ptr[offset+3] = 'r';
-  data_ptr[offset+4] = 'e';
-  data_ptr[offset+5] = 'h';
-  data_ptr[offset+6] = 'e';
-  data_ptr[offset+7] = 'r';
-  data_ptr[offset+8] = 'e';
-//#endif
 
 	if (!an) {
 		adf_os_assert(0);
@@ -1137,19 +1055,6 @@ void ath_tx_status_update_rate(struct ath_softc_tgt *sc,
 	RATE_TABLE_11N *pRateTable = (RATE_TABLE_11N *)asc->hwRateTable[sc->sc_curmode];
 
 //  ar5416_writeDebug(sc->sc_ah, 7);
-//#ifdef GNYCHIS_DEBUG
-  a_uint32_t offset = 70;
-  char *data_ptr = DATA_LOCATION;
-  data_ptr[offset+0] = 'w';
-  data_ptr[offset+1] = 'e';
-  data_ptr[offset+2] = 'a';
-  data_ptr[offset+3] = 'r';
-  data_ptr[offset+4] = 'e';
-  data_ptr[offset+5] = 'h';
-  data_ptr[offset+6] = 'e';
-  data_ptr[offset+7] = 'r';
-  data_ptr[offset+8] = 'e';
-//#endif
 
 	/* HT Rate */
 	if (pRateTable->info[rcs[series].rix].rateCode & 0x80) {
@@ -1176,20 +1081,6 @@ struct ath_ratectrl *
 ath_rate_attach(struct ath_softc_tgt *sc)
 {
 	struct atheros_softc *asc;
-
-#ifdef GNYCHIS_DEBUG
-  a_uint32_t offset = 70;
-  char *data_ptr = DATA_LOCATION;
-  data_ptr[offset+0] = 'w';
-  data_ptr[offset+1] = 'e';
-  data_ptr[offset+2] = 'a';
-  data_ptr[offset+3] = 'r';
-  data_ptr[offset+4] = 'e';
-  data_ptr[offset+5] = 'h';
-  data_ptr[offset+6] = 'e';
-  data_ptr[offset+7] = 'r';
-  data_ptr[offset+8] = 'e';
-#endif
 
 	asc = adf_os_mem_alloc(sizeof(struct atheros_softc));
 	if (asc == NULL)
@@ -1231,20 +1122,6 @@ ath_rate_findrate(struct ath_softc_tgt *sc,
 	}
 //  ar5416_writeDebug(sc->sc_ah, 8);
         
-//#ifdef GNYCHIS_DEBUG
-  a_uint32_t offset = 70;
-  char *data_ptr = DATA_LOCATION;
-  data_ptr[offset+0] = 'w';
-  data_ptr[offset+1] = 'e';
-  data_ptr[offset+2] = 'a';
-  data_ptr[offset+3] = 'r';
-  data_ptr[offset+4] = 'e';
-  data_ptr[offset+5] = 'h';
-  data_ptr[offset+6] = 'e';
-  data_ptr[offset+7] = 'r';
-  data_ptr[offset+8] = 'e';
-//#endif
-
 	ath_rate_findrate_11n(sc, an, frameLen, numTries, numRates, stepDnInc,
 			      rcflag, series, isProbe);
 }
@@ -1313,20 +1190,6 @@ ath_rate_findrate_11n(struct ath_softc_tgt *sc,
 		return;
 	}
   ar5416_writeDebug(sc->sc_ah, 9);
-
-//#ifdef GNYCHIS_DEBUG
-  a_uint32_t offset = 70;
-  char *data_ptr = DATA_LOCATION;
-  data_ptr[offset+0] = 'w';
-  data_ptr[offset+1] = 'e';
-  data_ptr[offset+2] = 'a';
-  data_ptr[offset+3] = 'r';
-  data_ptr[offset+4] = 'e';
-  data_ptr[offset+5] = 'h';
-  data_ptr[offset+6] = 'e';
-  data_ptr[offset+7] = 'r';
-  data_ptr[offset+8] = 'e';
-//#endif
 
 	rcRateFind_11n(sc, an, numTries, numRates, stepDnInc, rcflag, series, isProbe);
 }

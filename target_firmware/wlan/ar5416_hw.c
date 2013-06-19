@@ -971,7 +971,7 @@ void ar5416Set11nRateScenario_20(struct ath_hal *ah, struct ath_tx_desc *ds,
         (void)nseries;
 
         // gnychis
-        series[0].Rate = 0xC;
+        //series[0].Rate = 0xC;
         //a_uint32_t offset = 70;
         //char *data_ptr = ds->ds_data;
         //data_ptr[offset+0] = 0xff;
