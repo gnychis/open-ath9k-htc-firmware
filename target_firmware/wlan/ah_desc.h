@@ -154,6 +154,7 @@ struct ath_rx_desc {
 
 struct ath_tx_desc {
     ATH_GENERIC_DESC
+    a_uint32_t   ds_rate;
     a_uint32_t   ds_hw[20];
     union {
 	struct ath_tx_status tx;

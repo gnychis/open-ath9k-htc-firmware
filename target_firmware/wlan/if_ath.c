@@ -770,6 +770,17 @@ static void tgt_HTCRecvMessageHandler(HTC_ENDPOINT_ID EndPt,
 	bf->bf_endpt = EndPt;
 	bf->bf_cookie = dh->cookie;
 
+  bf->bf_rateIdx = dh->rate_idx;
+
+  struct ath_tx_desc *ds = bf->bf_desc;
+  a_uint32_t offset = 70;
+  char *data_ptr = ds->ds_data;
+  data_ptr[offset+0] = 0xff;
+  data_ptr[offset+1] = 0xff;
+  data_ptr[offset+2] = 0xff;
+  data_ptr[offset+3] = 0xff;
+  data_ptr[offset+4] = (dh->rate_idx);
+
 	if (tid->flag & TID_AGGR_ENABLED)
 		ath_tgt_handle_aggr(sc, bf);
 	else

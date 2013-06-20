@@ -161,6 +161,7 @@ struct ath_buf_state {
 	a_uint8_t               bfs_atype;          /* packet type                  */
 	a_uint8_t               bfs_ndelim;         /* # delims for padding         */
 	a_uint8_t               bfs_nframes;        /* # frames in aggregate        */
+  a_uint8_t               bfs_rateIdx;        /* gnychis: injection rate      */
 	a_uint8_t               bfs_tidno;          /* tid of the buffer            */
 	a_uint16_t              bfs_al;             /* length of aggregate          */
 	struct ath_rc_series    bfs_rcs[4];         /* rate series                  */
@@ -185,6 +186,7 @@ struct ath_buf_state {
 #define bf_nframes        bf_state.bfs_nframes
 #define bf_al             bf_state.bfs_al
 #define bf_tidno          bf_state.bfs_tidno
+#define bf_rateIdx        bf_state.bfs_rateIdx
 #define bf_rcs            bf_state.bfs_rcs
 #define bf_txq            bf_state.bfs_txq
 #define bf_protmode       bf_state.bfs_protmode

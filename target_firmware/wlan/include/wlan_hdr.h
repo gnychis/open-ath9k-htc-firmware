@@ -84,7 +84,8 @@ typedef struct __data_header {
 	a_int8_t    keyix;
 	a_uint8_t   cookie;
 	a_uint8_t   pad;
-  a_uint32_t   rate_idx;
+  a_uint8_t   rate_idx;
+  a_uint8_t   blah;
 } POSTPACK ath_data_hdr_t;
 
 #define RX_HEADER_SPACE     HTC_HDR_LENGTH + sizeof(struct rx_frame_header)
